@@ -1,0 +1,1 @@
+This is a repository I created to learn Python. It contains a summary of content from W3Schools, as well as notes and summaries from YouTube videos. Please note that some of the notes are written in Catalan.
