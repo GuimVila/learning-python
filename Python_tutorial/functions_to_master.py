@@ -90,3 +90,66 @@ sorted_people2 = sorted(people, key=lambda person: person["age"], reverse=True)
 print(sorted_people2)
 
 # Enumerate function 
+
+# First, take a look at what happens if we don't use it:
+
+tasks = ["Write report", "Attend meeting", "Review code", "Submit timesheet"]
+
+for index in range(len(tasks)):
+    task = tasks[index]
+    print(f"{index + 1}. {task}")
+    
+# Using the enumerate function we can clear the code: 
+  
+for index, task in enumerate(tasks):
+    print(f"{index + 1}. {task}")
+    
+# The zip function 
+
+names = ["Alice", "Bob", "Daniel", "David", "Tim"] # It doesn't include Tim because we don't have a corresponding age
+ages = [30, 25, 35, 20]
+gender = ["Female", "Male", "Male"]
+
+for idx in range(min(len(names), len(ages))): # Calcula quants elements es poden processar basant-se en la llista més curta.
+    name = names[idx]
+    age = ages[idx]
+    print(f"{name} is {age} years old")
+    
+# The zip function combines different iterable objects
+
+combined = list(zip(names, ages))
+print(combined)
+
+for name, age in combined:
+    print(f"{name} is {age} years old")
+
+combined2= list(zip(names, ages, gender))
+print(combined2)
+
+for name, age, gender in combined2:
+    print(f"{name} is {age} years old and is {gender}") # It will only print out 3 names
+    
+# Open function 
+
+# We can open a file, read from it, write to it... 
+
+file = open("test.txt", "w") # The second option is the file mode
+file.write("Hello world\nmy name is Guillem")
+file.close() #So we don't  have any memory leaks and we don't leave the file open in memory when we actually don't mean to do that.  
+# r stands for read
+# w stands for write. Will override a file if it already exist
+# a stands for append
+
+# Instead of opening it and closing it like that, it is recommended to use the following syntax:
+# Using context manager: 
+
+with open("test.txt", "w") as file: 
+    file.write("here") # Will automatically handle closing the file for us
+    
+with open("test.txt", "r") as file: 
+    text = file.read()
+    print(text)
+    
+with open("test.txt", "a") as file: 
+    text = file.write("\nnew addition")
+    print(text)
