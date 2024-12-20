@@ -1,81 +1,81 @@
-# Print 
-
+# **Print Function**
+# La funció `print` permet imprimir informació a la consola.
 age = 38
 name = "John"
 
-print(f" My name is {name} and I'm {age} years old ")
-print("My name is", name, "and I'm", age, "years old", sep="|")
-print("Hello")
-print("World")
+# Exemple: Format de cadena amb `f-string`
+print(f"My name is {name} and I'm {age} years old")
 
+# Exemple: Separador personalitzat amb `sep`
+print("My name is", name, "and I'm", age, "years old", sep="|")
+
+# Exemple: Control de la línia final amb `end`
 print("Hello", end=" ")
 print("World")
 
-# Help 
-
+# **Help Function**
+# Mostra informació detallada sobre qualsevol funció:
 # help(print)
 
-# Range 
-
-rng = range(10)
-
-print(rng)
+# **Range Function**
+# Crea un rang d’enters.
+rng = range(10)  # De 0 a 9
 print(list(rng))
 
-rng_2 = range(2, 10)
-print(list(rng_2))
+# Rang amb valors inicial i final
+rng_start_end = range(2, 10)  # De 2 a 9
+print(list(rng_start_end))
 
-rng_3 = range(2, 10, 2) # The last one acts as the step value
-print(list(rng_3))
+# Rang amb pas específic
+rng_step = range(2, 10, 2)  # De 2 a 8 amb pas de 2
+print(list(rng_step))
 
-# Map
-# The map function allows us to apply a function to every single item in an iterable object
-
+# **Map Function**
+# `map` aplica una funció a cada element d’un iterable.
 strings = ["my", "world", "apple", "pear"]
 
-lenghts = map(len, strings) # We can pass our own function or any function as a first parameter
-print(list(lenghts))
+# Exemple: Longitud de cada element
+lengths = list(map(len, strings))
+print(lengths)
 
-lenghts2 = map(lambda x: x + "s", strings)
-print(list(lenghts2))
+# Exemple: Transformació amb una funció lambda
+plural_strings = list(map(lambda x: x + "s", strings))
+print(plural_strings)
 
-def add_s(string): 
+# Exemple: Transformació amb una funció definida
+def add_suffix_s(string):
     return string + "s"
 
-lenghts3 = map(add_s, strings)
-print(list(lenghts3))
+plural_with_func = list(map(add_suffix_s, strings))
+print(plural_with_func)
 
-# Filter --> related to the map function. If that funcion returns true, it will keep the item. Otherwise it will remove it. 
-
+# **Filter Function**
+# `filter` retorna només els elements que compleixen una condició.
 def longer_than_4(string):
     return len(string) > 4
 
-filtered = filter(longer_than_4, strings)
-print(list(filtered))
+filtered_strings = list(filter(longer_than_4, strings))
+print(filtered_strings)
 
-filtered2 = filter(lambda x: len(x) > 4, strings)
-print(list(filtered2))
+# Exemple amb lambda
+filtered_lambda = list(filter(lambda x: len(x) > 4, strings))
+print(filtered_lambda)
 
-# Sum function 
-
+# **Sum Function**
+# Calcula la suma d’un iterable.
 numbers = {1, 2, 3, 4, 5, 24, 4.5}
-print(sum(numbers))
+print(sum(numbers))  # Suma total
 
-# You can also pass a start value
+# Exemple: Suma amb un valor inicial
 print(sum(numbers, start=10))
 
-# Sorted function will sort an iterable object in an ascending or descending order
+# **Sorted Function**
+# Ordena un iterable en ordre ascendent o descendent.
+numbers_list = [4, 5, 2, 3, -1, 0, 9]
+print(sorted(numbers_list))  # Ascendent
+print(sorted(numbers_list, reverse=True))  # Descendent
 
-numbers2 = [4, 5, 2, 3, -1, 0, 9]
-sorted_nums = sorted(numbers2)
-print(sorted_nums)
-
-sorted_nums2 = sorted(numbers2, reverse=True)
-print(sorted_nums2)
-
-# We can also pass a a python function using the key argument
-# It will apply this function to every single item of the iterable object
-
+# Ordenar amb una funció personalitzada
 people = [
     {"name": "Alice", "age": 30},
     {"name": "Bob", "age": 25},
@@ -86,70 +86,37 @@ people = [
 sorted_people = sorted(people, key=lambda person: person["age"])
 print(sorted_people)
 
-sorted_people2 = sorted(people, key=lambda person: person["age"], reverse=True)
-print(sorted_people2)
-
-# Enumerate function 
-
-# First, take a look at what happens if we don't use it:
-
+# **Enumerate Function**
+# Exemple: Millorar iteracions amb índex.
 tasks = ["Write report", "Attend meeting", "Review code", "Submit timesheet"]
 
-for index in range(len(tasks)):
-    task = tasks[index]
-    print(f"{index + 1}. {task}")
-    
-# Using the enumerate function we can clear the code: 
-  
-for index, task in enumerate(tasks):
-    print(f"{index + 1}. {task}")
-    
-# The zip function 
+for index, task in enumerate(tasks, start=1):
+    print(f"{index}. {task}")
 
-names = ["Alice", "Bob", "Daniel", "David", "Tim"] # It doesn't include Tim because we don't have a corresponding age
+# **Zip Function**
+# Combina diversos iterables en tuples.
+names = ["Alice", "Bob", "Daniel", "David", "Tim"]
 ages = [30, 25, 35, 20]
-gender = ["Female", "Male", "Male"]
-
-for idx in range(min(len(names), len(ages))): # Calcula quants elements es poden processar basant-se en la llista més curta.
-    name = names[idx]
-    age = ages[idx]
-    print(f"{name} is {age} years old")
-    
-# The zip function combines different iterable objects
+genders = ["Female", "Male", "Male"]
 
 combined = list(zip(names, ages))
 print(combined)
 
-for name, age in combined:
-    print(f"{name} is {age} years old")
+combined_with_genders = list(zip(names, ages, genders))
+print(combined_with_genders)
 
-combined2= list(zip(names, ages, gender))
-print(combined2)
+# **Open Function**
+# Obrir, escriure i llegir fitxers.
 
-for name, age, gender in combined2:
-    print(f"{name} is {age} years old and is {gender}") # It will only print out 3 names
-    
-# Open function 
+# Exemple: Escriure un fitxer
+with open("test.txt", "w") as file:
+    file.write("Hello world\nmy name is Guillem")
 
-# We can open a file, read from it, write to it... 
+# Exemple: Llegir un fitxer
+with open("test.txt", "r") as file:
+    content = file.read()
+    print(content)
 
-file = open("test.txt", "w") # The second option is the file mode
-file.write("Hello world\nmy name is Guillem")
-file.close() #So we don't  have any memory leaks and we don't leave the file open in memory when we actually don't mean to do that.  
-# r stands for read
-# w stands for write. Will override a file if it already exist
-# a stands for append
-
-# Instead of opening it and closing it like that, it is recommended to use the following syntax:
-# Using context manager: 
-
-with open("test.txt", "w") as file: 
-    file.write("here") # Will automatically handle closing the file for us
-    
-with open("test.txt", "r") as file: 
-    text = file.read()
-    print(text)
-    
-with open("test.txt", "a") as file: 
-    text = file.write("\nnew addition")
-    print(text)
+# Exemple: Afegir contingut a un fitxer
+with open("test.txt", "a") as file:
+    file.write("\nnew addition")
