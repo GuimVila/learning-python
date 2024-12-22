@@ -55,25 +55,60 @@ def get_total_discount(prices: Iterable[float], percent: float) -> float:
     total: float = sum(prices)  # Suma dels preus
     return total * (1 - percent)  # Aplicació del descompte
 
-# **3. Main Function**
-# La funció `main` encapsula el codi principal del programa.
-# Permet executar la lògica principal sense que aquesta interfereixi si el fitxer
-# s'importa en un altre script.
+# **3. Unimplemented Function**
+# En lloc d'utilitzar `pass` per funcions sense implementar, utilitza `NotImplementedError` per indicar clarament
+# que una funcionalitat està pendent.
+def connect() -> None:
+    """
+    Placeholder for a database connection function.
+    
+    Raises a NotImplementedError indicating the function is not yet implemented.
+    """
+    raise NotImplementedError('connect() is missing code')
+
+# Exemple d'ús:
+try:
+    connect()
+except NotImplementedError as e:
+    print(f"Error: {e}")
+
+# **4. Specify Return Types**
+# Aquesta funció retorna un diccionari d'usuaris, amb ID com a claus i noms com a valors.
+# Especificar el tipus de retorn amb `-> dict[int, str]` millora la claredat i ajuda amb verificació estàtica.
+def get_users() -> dict[int, str]: 
+    """
+    Retrieve a dictionary of users with their IDs and names.
+    
+    :return: A dictionary where keys are user IDs (int) and values are user names (str).
+    :rtype: dict[int, str]
+    
+    :Example:
+    >>> get_users()
+    {1: 'Bob', 2: 'Jef', 3: 'Tom'}
+    """
+    users: dict[int, str] = {1: 'Bob', 2: 'Jef', 3: 'Tom'}
+    return users
+
+# Exemple d'ús:
+print("Users:", get_users())
+
+# **5. Main Function**
+# La funció `main` encapsula la lògica principal del programa.
 def main() -> None:
     """
     Entry point of the program. Demonstrates usage of the above functions.
     """
+    print("Demonstrating get_total_discount:")
     try:
-        # Exemple: calcular el descompte d'una llista de preus amb un 50% de descompte.
         discounted_total = get_total_discount([1, 100, 40, 35], 0.5)
         print(f"Total after discount: {discounted_total}")
     except ValueError as e:
         print(f"Error: {e}")
+    
+    print("\nDemonstrating get_users:")
+    print(get_users())
 
-# **4. Execució principal**
+# **6. Execució principal**
 # Aquest bloc controla si el fitxer s’executa directament o s'importa com a mòdul.
-# - Si s’executa directament (`better_functions.py`), `__name__` serà `'__main__'`
-#   i s'executarà la funció `main`.
-# - Si s'importa des d'un altre fitxer, `__name__` NO serà `'__main__'` i aquest bloc no s'executarà.
 if __name__ == '__main__':
     main()
